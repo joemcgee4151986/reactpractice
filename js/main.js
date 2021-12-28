@@ -24,10 +24,21 @@ class Square extends React.Component {
 //}
 
 class Board extends React.Component {
-  renderSquare(i) {
-    return <Square value={i}/>;
-    // displays the value as an integer
+  constructor(props){ // we use  constructor and super to have two child components. OOP
+    super(props)
+    this.state = {
+      squares: Array(9).fill(null), //array has 9 because there are 9 squares
+    };
   }
+  renderSquare(i) {
+    return (
+    <Square value={this.state.squares[i]}
+    onclick={() => this.handleClick(i)}
+    />
+    // displays the value as an integer
+    );
+  }
+
 
   render() {
     const status = 'Next player: X';
@@ -80,3 +91,6 @@ ReactDOM.render(
   <Game />,
   document.getElementById('root')
 );
+
+//The onClick prop on the built-in DOM <button> component tells React to set up a click event listener.
+// When the button is clicked, React will call the onClick event handler that is defined in Square’s render() method.
