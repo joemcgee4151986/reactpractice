@@ -1,20 +1,20 @@
 class Square extends React.Component {
-  constructor(props) {
-    super(props); // props = properties
-    this.state = {
-      value:null, //no value
-    };
-  }
+ 
   render() {
     return ( // when the user clicks the square, the square will display an 'x'
-      <button className="square" onClick={() => this.setState({value: 'X'})}>
-        {this.state.value} 
-        
+      <button
+        className="square"
+        onClick={() => this.props.onClick()}
+      >
+        {this.props.value}
       </button>
-      //this.props.value displays the value in the square
     );
   }
 }
+      //this.props.value displays the value in the square
+    
+  
+
 // class Square extends React.Component {
 //render() {
 // return (
@@ -30,10 +30,15 @@ class Board extends React.Component {
       squares: Array(9).fill(null), //array has 9 because there are 9 squares
     };
   }
+  handleClick(i){
+    const squares = this.state.squares.slice();
+    squares[i] = 'X';
+    this.setState({squares: squares});
+  }
   renderSquare(i) {
     return (
     <Square value={this.state.squares[i]}
-    onclick={() => this.handleClick(i)}
+    onClick={() => this.handleClick(i)}
     />
     // displays the value as an integer
     );
